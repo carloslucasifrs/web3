@@ -1,0 +1,34 @@
+### Nova Pessoa Inválida
+
+POST http://localhost:8080/api/v1/pessoas HTTP/1.1
+Content-Type: application/json
+
+{
+	"nome": "Ciclano de Tal"
+}
+
+### Nova Pessoa Válida
+
+POST http://localhost:8080/api/v1/pessoas HTTP/1.1
+Content-Type: application/json
+
+{
+	"cpf": "12345678904",
+	"nome": "Delano de Tal"
+}
+
+### Listar Pessoas
+
+GET http://localhost:8080/api/v1/pessoas HTTP/1.1
+
+### Ler Pessoa
+
+GET http://localhost:8080/api/v1/pessoas/16536078748 HTTP/1.1
+
+### Ler Pessoa CPF mal-formatado
+
+GET http://localhost:8080/api/v1/pessoas/15678903 HTTP/1.1
+
+### Ler Pessoa CPF mal-formatado
+
+GET http://localhost:8080/api/v1/pessoas/123456q7891 HTTP/1.1
