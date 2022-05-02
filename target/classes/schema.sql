@@ -1,5 +1,0 @@
-CREATE TABLE pessoas (
-	id   UUID         NOT NULL PRIMARY KEY,
-	cpf  VARCHAR(11)  NOT NULL UNIQUE,
-	nome VARCHAR(100) NOT NULL
-);

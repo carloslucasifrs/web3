@@ -7,8 +7,10 @@ import java.util.UUID;
 import org.springframework.data.repository.Repository;
 
 import br.edu.ifrs.riogrande.tads.carloslucas.app.model.Pessoa;
-
+// Spring Data JPA
 public interface PessoaRepository extends Repository<Pessoa, UUID> {
+
+// CRUD, Create, Read, Update, Delete
 
 	Pessoa save(Pessoa p);
 
@@ -16,7 +18,19 @@ public interface PessoaRepository extends Repository<Pessoa, UUID> {
 
 	Optional<Pessoa> findByCpf(String cpf);
 
+	void delete(Pessoa pessoa);
+
+	Optional<Pessoa> findById(UUID uuid);
+
+	boolean existsByCpf(String cpf);
+
+	// É possível usar query nativa
+	// @Query(value = "select a, b, c ....", nativeQuery = true)
+	// Pessoa findPessoaAlgumaCoisa();
+
 }
+
+// CoC // Convention Over Configuration
 
 /*
 @Component
