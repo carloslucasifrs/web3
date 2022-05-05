@@ -10,68 +10,68 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrs.riogrande.tads.carloslucas.app.exceptions.NotFoundException;
-import br.edu.ifrs.riogrande.tads.carloslucas.app.model.Pessoa;
-import br.edu.ifrs.riogrande.tads.carloslucas.app.repository.PessoaRepository;
-import br.edu.ifrs.riogrande.tads.carloslucas.app.services.dto.PessoaRequest;
+import br.edu.ifrs.riogrande.tads.carloslucas.app.model.User;
+import br.edu.ifrs.riogrande.tads.carloslucas.app.repository.UserRepository;
+import br.edu.ifrs.riogrande.tads.carloslucas.app.services.dto.UserRequest;
 
 @Service
-public class PessoaService { // Use Case (independente da comunição)
+public class UserService { // Use Case (independente da comunição)
 	// Feign, RestTemplate
 	// DAO: Data Access Object, DAL: Data Access Layer
 	// Inversão da Dependência (Clean Code)
-	private final PessoaRepository repository; // inspirado na ideia do Eric Evans (DDD)
+	private final UserRepository repository; // inspirado na ideia do Eric Evans (DDD)
 
 	@Autowired
-	public PessoaService(PessoaRepository repository) {
+	public UserService(UserRepository repository) {
 		this.repository = repository;
 	}
 
-	public void salvar(PessoaRequest request) {
+	public void salvar(UserRequest request) {
 
 		// mapeamento
-		Pessoa pessoa = new Pessoa();
-		pessoa.setCpf(request.getCpf());
-		pessoa.setNome(request.getNome());
+		User user = new User();
+		user.setCpf(request.getCpf());
+		user.setName(request.getName());
 
-		repository.save(pessoa);
+		repository.save(user);
 	}
 
-	public List<Pessoa> listar() {
+	public List<User> listar() {
 		return repository.findAll();
 	}
 
-	public Optional<Pessoa> find(String cpf) {
+	public Optional<User> find(String cpf) {
 		return repository.findByCpf(cpf);
 	}
 
-	public Pessoa load(String cpf) {
+	public User load(String cpf) {
 		return this.find(cpf)
 			.orElseThrow(() -> new NotFoundException("Pessoa não encontrada"));
 	}
 
 	public void delete(String cpf) {
 
-		Pessoa pessoa = repository.findByCpf(cpf) // param hint
+		User user = repository.findByCpf(cpf) // param hint
 			.orElseThrow(() -> new NotFoundException("Pessoa não encontrada"));
 
-		repository.delete(pessoa);
+		repository.delete(user);
 
-		// if (pessoa.isPresent()) {
+		// if (user.isPresent()) {
 		// } else {
 		// 	throw NotFoundException("Pessoa com o CPF %s não foi encontrada");
 		// }
 	}
 
-	public void update(UUID uuid, @Valid PessoaRequest body) {
+	public void update(UUID uuid, @Valid UserRequest body) {
 
-		Pessoa pessoa = repository.findById(uuid)
+		User user = repository.findById(uuid)
 				.orElseThrow(() -> new NotFoundException("Pessoa não encontrada"));
 
 		// mapeamento
-		pessoa.setNome(body.getNome());
-		// pessoa.setCpf(body.getCpf());
+		user.setName(body.getName());
+		// user.setCpf(body.getCpf());
 
-		repository.save(pessoa);
+		repository.save(user);
 	}
 
 }

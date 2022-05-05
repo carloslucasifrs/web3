@@ -10,8 +10,8 @@ import javax.persistence.Table;
 
 // mapear a classe à tabela, e as instâncias às rows (ORM)
 @Entity
-@Table(name = "pessoas")
-public class Pessoa { // Entidade: Classe -> Tabela (JPA)
+@Table(name = "users")
+public class User { // Entidade: Classe -> Tabela (JPA)
 
 	@Id
 	@GeneratedValue
@@ -20,8 +20,8 @@ public class Pessoa { // Entidade: Classe -> Tabela (JPA)
 	@Column(name = "cpf", length = 11, nullable = false, unique = true)
 	private String cpf; // chave
 
-	@Column(name = "nome", length = 100, nullable = false)
-	private String nome;
+	@Column(name = "name", length = 100, nullable = false)
+	private String name;
 
 	public void setId(UUID id) {
 		this.id = id;
@@ -39,17 +39,17 @@ public class Pessoa { // Entidade: Classe -> Tabela (JPA)
 		this.cpf = cpf;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public String toString() {
-		return "Pessoa #" + id + " " + cpf + " " + nome;
+		return "Pessoa #" + id + " " + cpf + " " + name;
 	}
 
 }

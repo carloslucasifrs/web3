@@ -6,7 +6,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.br.CPF;
 
 // @Validated
-public class PessoaRequest {
+public class UserRequest {
 
 	@NotNull(message = "O CPF é obrigatório")
 	@CPF(message = "CPF inválido: deve ter 11 dígitos com dígito verificador correto")
@@ -14,7 +14,7 @@ public class PessoaRequest {
 
 	@NotNull(message = "O Nome é obrigatório")
 	@Pattern(regexp = "^\\w{2,}.*", message = "Nome inválido: deve ter pelo menos duas letras")
-	private String nome;
+	private String name;
 
 	public String getCpf() {
 		return cpf;
@@ -24,17 +24,17 @@ public class PessoaRequest {
 		this.cpf = cpf;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public String toString() {
-		return "Pessoa " + cpf + " " + nome;
+		return "Pessoa " + cpf + " " + name;
 	}
 
 }

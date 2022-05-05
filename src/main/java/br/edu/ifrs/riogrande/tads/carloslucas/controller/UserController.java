@@ -30,46 +30,46 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 // import br.edu.ifrs.riogrande.tads.carloslucas.app.model.Doacao;
-import br.edu.ifrs.riogrande.tads.carloslucas.app.model.Pessoa;
+import br.edu.ifrs.riogrande.tads.carloslucas.app.model.User;
 // import br.edu.ifrs.riogrande.tads.carloslucas.app.services.DoacaoService;
-import br.edu.ifrs.riogrande.tads.carloslucas.app.services.PessoaService;
+import br.edu.ifrs.riogrande.tads.carloslucas.app.services.UserService;
 // import br.edu.ifrs.riogrande.tads.carloslucas.app.services.dto.DoacaoRequest;
-import br.edu.ifrs.riogrande.tads.carloslucas.app.services.dto.PessoaRequest;
+import br.edu.ifrs.riogrande.tads.carloslucas.app.services.dto.UserRequest;
 // import br.edu.ifrs.riogrande.tads.carloslucas.app.services.dto.SituacaoRequest;
 import lombok.RequiredArgsConstructor;
 
 // para "puristas" de rest (restafarian)
 // path é para um recurso (subrecurso)
-// www.dominio/v1/pessoas/12345678901
+// www.dominio/v1/users/12345678901
 
 @RequiredArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/api/v1") // solução pragmática para versionamento
-public class PessoaController { // definir o resource: Pessoa (api Pessoa)
+public class UserController { // definir o resource: Pessoa (api Pessoa)
 
-	private final PessoaService service;
+	private final UserService service;
 	// private final DoacaoService doacaoService;
 
-	// /pessoas/12345678901/doar <- Não se coloca ações/verbos no PATH (viola REST)
+	// /users/12345678901/doar <- Não se coloca ações/verbos no PATH (viola REST)
 	// GET/POST/PUT/DELETE/PATCH
 	// /pedido/123434/cancelar    {status:cancelado}
 
 	// Verbo/Método POST não é seguro não idempotente (não pode ir de novo)
 	// idempotência: execução "duplicada" refletir no estado servidor
-	@PostMapping(path = "/pessoas", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> nova(
-			@RequestBody @Valid PessoaRequest body) {
+			@RequestBody @Valid UserRequest body) {
 
 		service.salvar(body);
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
-	@PutMapping(path = "/pessoas/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path = "/users/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(code = HttpStatus.OK)
 	public void atualizar(
 		@PathVariable(name = "id") String id,
-		@RequestBody @Valid PessoaRequest body) {
+		@RequestBody @Valid UserRequest body) {
 
 			UUID uuid = UUID.fromString(id);
 
@@ -80,15 +80,15 @@ public class PessoaController { // definir o resource: Pessoa (api Pessoa)
 
 
 
-	@GetMapping(path = "/pessoas", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Pessoa>> listar() {
+	@GetMapping(path = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<User>> listar() {
 
-		List<Pessoa> pessoas = service.listar();
+		List<User> users = service.listar();
 
-		return ResponseEntity.ok(pessoas);
+		return ResponseEntity.ok(users);
 	}
 
-	@GetMapping(path = "/pessoas/{cpf}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/users/{cpf}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> ler(
 		@Pattern(regexp = "^\\d{11}$", message = "CPF inválido: deve ter 11 dígitos")
 		@CPF(message = "CPF inválido: número inválido") // vendor lock-in (atrelando o código a uma lib específica de um fornecedor)
@@ -98,7 +98,7 @@ public class PessoaController { // definir o resource: Pessoa (api Pessoa)
 		return ResponseEntity.ok(service.load(cpf));
 	}
 
-	@DeleteMapping(path = "/pessoas/{cpf}")
+	@DeleteMapping(path = "/users/{cpf}")
 	@ResponseStatus(code = HttpStatus.OK)
 	public void excluir(
 		@Pattern(regexp = "^\\d{11}$", message = "CPF inválido: deve ter 11 dígitos")
@@ -110,7 +110,7 @@ public class PessoaController { // definir o resource: Pessoa (api Pessoa)
 
 	}
 
-	// @PostMapping(path = "/pessoas/{cpf}/doacoes")
+	// @PostMapping(path = "/users/{cpf}/doacoes")
 	// public ResponseEntity<?> doar(@RequestBody DoacaoRequest doacao,
 	// 	@CPF(message = "CPF inválido: número inválido") @PathVariable String cpf) {
 
@@ -125,7 +125,7 @@ public class PessoaController { // definir o resource: Pessoa (api Pessoa)
 	// }
 
 	// FIXME: não retornar a Entidade, em vez retornar um DoacaoDTO
-	// @GetMapping(path = "/pessoas/{cpf}/doacoes/{id}")
+	// @GetMapping(path = "/users/{cpf}/doacoes/{id}")
 	// public ResponseEntity<Doacao> lerDoacao(
 	// 	@CPF(message = "CPF inválido: número inválido") @PathVariable String cpf,
 	// 	@PathVariable(name = "id") Integer idDoacao) {
@@ -134,7 +134,7 @@ public class PessoaController { // definir o resource: Pessoa (api Pessoa)
 	// }
 
 	// // PUT, PATCH
-	// @PutMapping(path = "/pessoas/{cpf}/doacoes/{id}")
+	// @PutMapping(path = "/users/{cpf}/doacoes/{id}")
 	// @ResponseStatus(code = HttpStatus.OK)
 	// public void atualizarDoacao(@RequestBody DoacaoRequest doacao,
 	// 		@CPF(message = "CPF inválido: número inválido") @PathVariable String cpf,
@@ -143,7 +143,7 @@ public class PessoaController { // definir o resource: Pessoa (api Pessoa)
 	// 	doacaoService.atualizar(cpf, idDoacao, doacao);
 	// }
 
-	// @PatchMapping(path = "/pessoas/{cpf}/doacoes/{id}")
+	// @PatchMapping(path = "/users/{cpf}/doacoes/{id}")
 	// public ResponseEntity<Doacao> patchDoacao(
 	// 	@RequestBody SituacaoRequest novaSituacao,
 	// 	@CPF(message = "CPF inválido: número inválido") @PathVariable String cpf,
