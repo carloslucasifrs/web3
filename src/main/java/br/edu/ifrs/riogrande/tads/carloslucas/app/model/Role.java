@@ -29,7 +29,7 @@ public class Role {
     @ToString.Include
     Integer id;
 
-    @Column(name ="role", nullable = false)
+    @Column(name ="role", length = 20, nullable = false, unique = true)
     @ToString.Include
     String role;
 
