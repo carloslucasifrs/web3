@@ -124,7 +124,7 @@ public class PessoaController { // definir o resource: Pessoa (api Pessoa)
 	// 		return ResponseEntity.created(location).build(); // 201
 	// }
 
-	// // FIXME: não retornar a Entidade, em vez retornar um DoacaoDTO
+	// FIXME: não retornar a Entidade, em vez retornar um DoacaoDTO
 	// @GetMapping(path = "/pessoas/{cpf}/doacoes/{id}")
 	// public ResponseEntity<Doacao> lerDoacao(
 	// 	@CPF(message = "CPF inválido: número inválido") @PathVariable String cpf,
