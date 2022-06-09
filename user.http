@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
 	"cpf": "76203811041",
-	"nome": "beltrano de Tal"
+	"name": "beltrano de Tal"
 }
 
 ### Atualizar Pessoa
@@ -23,7 +23,7 @@ Content-Type: application/json
 
 {
 	"cpf": "76203811041",
-	"nome": "Zigomar de Tal"
+	"name": "Zigomar de Tal444"
 }
 
 

@@ -1,6 +1,5 @@
 package br.edu.ifrs.riogrande.tads.carloslucas.controller;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -164,7 +163,7 @@ public class UserController { // definir o resource: Pessoa (api Pessoa)
 		List<String> erros = violations.stream()
 			.map(v -> v.getMessage())//.toList();
 			.collect(Collectors.toList());
-
+ 
 		return Map.of("erros", erros);
 	}
 

@@ -14,3 +14,9 @@ CREATE TABLE permissions (
 	permission	VARCHAR(30)		NOT NULL	UNIQUE
 );
 
+
+CREATE TABLE roles_has_permissions (
+	role_id		INTEGER		NOT NULL 	REFERENCES roles(id),
+	permission_id	INTEGER		NOT NULL	REFERENCES permissions(id)	
+);
+
