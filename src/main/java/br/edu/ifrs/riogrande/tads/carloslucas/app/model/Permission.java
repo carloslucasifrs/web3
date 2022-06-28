@@ -39,6 +39,11 @@ public class Permission {
     @ToString.Include
     String permission;
 
+    @Column(name = "model", length = 30, nullable = false)
+    @ToString.Include
+    String model;
+
+
     @ManyToMany(mappedBy = "permissions")
     private List<Role> roles;
 

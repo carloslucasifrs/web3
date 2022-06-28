@@ -7,10 +7,10 @@ INSERT INTO roles (role) VALUES ('admin');
 INSERT INTO roles (role) VALUES ('supervisor');
 INSERT INTO roles (role) VALUES ('usuario');
 
-INSERT INTO permissions (permission) VALUES ('create');
-INSERT INTO permissions (permission) VALUES ('read');
-INSERT INTO permissions (permission) VALUES ('update');
-INSERT INTO permissions (permission) VALUES ('delete');
+INSERT INTO permissions (permission, model) VALUES ('create', 'users');
+INSERT INTO permissions (permission, model) VALUES ('read', 'users');
+INSERT INTO permissions (permission, model) VALUES ('update', 'users');
+INSERT INTO permissions (permission, model) VALUES ('delete', 'users');
 
 INSERT INTO roles_has_permissions (role_id, permission_id) VALUES (1,1);
 INSERT INTO roles_has_permissions (role_id, permission_id) VALUES (1,2);
