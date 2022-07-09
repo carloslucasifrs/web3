@@ -2,13 +2,12 @@ package br.edu.ifrs.riogrande.tads.carloslucas.app.repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.data.repository.Repository;
 
 import br.edu.ifrs.riogrande.tads.carloslucas.app.model.User;
 // Spring Data JPA
-public interface UserRepository extends Repository<User, UUID> {
+public interface UserRepository extends Repository<User, Integer> {
 
 // CRUD, Create, Read, Update, Delete
 
@@ -20,7 +19,7 @@ public interface UserRepository extends Repository<User, UUID> {
 
 	void delete(User user);
 
-	Optional<User> findById(UUID uuid);
+	Optional<User> findById(Integer id);
 
 	boolean existsByCpf(String cpf);
 

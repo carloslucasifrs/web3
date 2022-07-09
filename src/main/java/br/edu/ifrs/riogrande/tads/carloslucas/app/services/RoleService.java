@@ -5,19 +5,23 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrs.riogrande.tads.carloslucas.app.exceptions.NotFoundException;
 import br.edu.ifrs.riogrande.tads.carloslucas.app.model.Role;
 import br.edu.ifrs.riogrande.tads.carloslucas.app.repository.RoleRepository;
 import br.edu.ifrs.riogrande.tads.carloslucas.app.services.dto.RoleRequest;
-import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class RoleService {
 
     private final RoleRepository roleRepository;
+
+    @Autowired
+	public RoleService(RoleRepository repository) {
+		this.roleRepository = repository;
+	}
 
     public void save(RoleRequest request) {
         Role role = new Role();

@@ -5,7 +5,10 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import lombok.EqualsAndHashCode;
+
 // @Validated
+@EqualsAndHashCode
 public class UserRequest {
 
 	@NotNull(message = "O CPF é obrigatório")

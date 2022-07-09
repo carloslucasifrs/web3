@@ -2,7 +2,6 @@ package br.edu.ifrs.riogrande.tads.carloslucas.app.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -62,9 +61,9 @@ public class UserService { // Use Case (independente da comunição)
 		// }
 	}
 
-	public void update(UUID uuid, @Valid UserRequest body) {
+	public void update(Integer id, @Valid UserRequest body) {
 
-		User user = repository.findById(uuid)
+		User user = repository.findById(id)
 				.orElseThrow(() -> new NotFoundException("Pessoa não encontrada"));
 
 		// mapeamento

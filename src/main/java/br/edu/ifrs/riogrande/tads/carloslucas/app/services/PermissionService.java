@@ -9,20 +9,28 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifrs.riogrande.tads.carloslucas.app.exceptions.NotFoundException;
 import br.edu.ifrs.riogrande.tads.carloslucas.app.model.Permission;
+import br.edu.ifrs.riogrande.tads.carloslucas.app.model.Role;
 import br.edu.ifrs.riogrande.tads.carloslucas.app.repository.PermissionRepository;
+import br.edu.ifrs.riogrande.tads.carloslucas.app.repository.RoleRepository;
 import br.edu.ifrs.riogrande.tads.carloslucas.app.services.dto.PermissionRequest;
 import lombok.RequiredArgsConstructor;
+
 
 @Service
 @RequiredArgsConstructor
 public class PermissionService {
 
     private final PermissionRepository permissionRepository;
+    private final RoleRepository roleRepository;
 
     public void save(PermissionRequest request) {
+        // Pessoa doador = pessoaRepository.findByCpf(cpf).orElseThrow(() -> new NotFoundException("Pessoa não encontrada"));
+        
+        Role role = roleRepository.findById(request.getRoles_id()).orElseThrow(() -> new NotFoundException("Role não encontrada"));
+
         Permission permission = new Permission();
         permission.setPermission(request.getPermission());
-
+        permission.setRole(role);
         permissionRepository.save(permission);
     }
 

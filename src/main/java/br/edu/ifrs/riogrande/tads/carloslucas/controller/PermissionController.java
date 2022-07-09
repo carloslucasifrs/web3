@@ -50,6 +50,7 @@ public class PermissionController {
             @RequestBody @Valid PermissionRequest body) {
 
         permissionService.save(body);
+        
         return ResponseEntity.ok(body);
 
     }

@@ -18,9 +18,7 @@ public class PermissionRequest {
     @Size(min = 3, max = 30, message = "Permissão deve possuir de 3 a 30 caracteres")
     String permission;
 
-
-    @NotNull(message = "Model é Obrigatória")
-    @Size(min = 3, max = 30, message = "Model deve possuir de 3 a 30 caracteres")
-    String model;
+    @NotNull(message = "Role ID é Obrigatória")
+    Integer roles_id;
 
 }
